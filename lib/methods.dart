@@ -327,7 +327,7 @@ class AppColors {
 }
 
 class Path {
-  static const String globalpath = 'http://192.168.133.70:3001';
+  static const String globalpath = 'http://192.168.1.34:3001';
 }
 
 class Size {

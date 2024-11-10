@@ -1,12 +1,13 @@
 import 'dart:convert';
-import 'package:http/http.dart' as http;
+
+import 'package:emailjs/emailjs.dart';
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
 import 'package:stage_app/admin/adminhome.dart';
 import 'package:stage_app/admin/trees.dart';
 import 'package:stage_app/admin/users.dart';
 import 'package:stage_app/methods.dart';
 import 'package:stage_app/signin.dart';
-import 'package:emailjs/emailjs.dart';
 
 class FarmerListPage extends StatefulWidget {
   @override
@@ -28,6 +29,7 @@ class _FarmerListPageState extends State<FarmerListPage> {
   }
 
   List<dynamic> adminList = [];
+
   void fetchadmin() async {
     try {
       var url =
@@ -151,6 +153,7 @@ class _FarmerListPageState extends State<FarmerListPage> {
 
   void sendWelcomeEmail(String expertEmail, expertname) async {
     try {
+      print(expertEmail);
       await EmailJS.send(
         'service_enyog9s',
         'template_4z7ufhu',
@@ -727,6 +730,8 @@ class _FarmerListPageState extends State<FarmerListPage> {
                                   GestureDetector(
                                     onTap: () {
                                       updatecontacted(expert['email'], true);
+                                      sendWelcomeEmail(
+                                          expert['email'], expert['name']);
                                     },
                                     child: Icon(Icons.check_circle,
                                         color: AppColors.vertfonce),
@@ -735,10 +740,13 @@ class _FarmerListPageState extends State<FarmerListPage> {
                                     width: 15,
                                   ),
                                   GestureDetector(
-                                    onTap: () {
-                                      sendWelcomeEmail(
-                                          expert['email'], expert['name']);
-                                      updatecontacted(expert['email'], true);
+                                    onTap: () async {
+                                      if (mounted) {
+                                        // Only proceed if the widget is still mounted
+                                        sendWelcomeEmail(
+                                            expert['email'], expert['name']);
+                                        updatecontacted(expert['email'], true);
+                                      }
                                     },
                                     child: Icon(Icons.message,
                                         color:
