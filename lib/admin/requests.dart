@@ -160,7 +160,7 @@ class _FarmerListPageState extends State<FarmerListPage> {
         {
           'expert_username': expertname,
           'user_email': expertEmail,
-          'admin_email': adminList[0]['email'],
+          'admin_email': "diseasecommunityoliveleaf@gmail.com",
         },
         const Options(
           publicKey: 'fLHQEuMDcSNX2lIB5',

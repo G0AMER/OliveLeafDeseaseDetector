@@ -1,12 +1,13 @@
 import 'dart:convert';
-import 'package:http/http.dart' as http;
+
+import 'package:emailjs/emailjs.dart';
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
 import 'package:stage_app/admin/adminhome.dart';
 import 'package:stage_app/admin/requests.dart';
 import 'package:stage_app/admin/trees.dart';
 import 'package:stage_app/admin/users.dart';
 import 'package:stage_app/methods.dart';
-import 'package:emailjs/emailjs.dart';
 
 class formulaire extends StatefulWidget {
   @override
@@ -25,6 +26,7 @@ class formulairepage extends State<formulaire> {
   late Widget champspassword;
 
   List<dynamic> adminList = [];
+
   void fetchadmin() async {
     try {
       var url =
@@ -353,8 +355,10 @@ class formulairepage extends State<formulaire> {
                             },
                           );
                         } else {
-                          signUpexpert();
-                          sendEmail(emailcontroller.text);
+                          if (mounted) {
+                            signUpexpert();
+                            sendEmail(emailcontroller.text);
+                          }
                         }
                       } else {
                         showDialog(
